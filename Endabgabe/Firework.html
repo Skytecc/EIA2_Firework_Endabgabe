@@ -1,14 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="main.js" ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <script src="main.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Firworks</title>
 </head>
+
 <body>
-    
+        <form action="">
+            <h3>Create new rocket</h3>
+            <div>
+                <input type="text" name="Text" id="name" placeholder="Rocket Name">
+            </div>
+
+            <div>
+                <p id="pColor1"> Color 1</p>
+                <input type="color" name="Color" id="color1">
+                <p id="pColor2">Color 2</p>
+                <input type="color" name="Color" id="color2">
+            </div>
+
+            <div>
+                <p>Particles</p>
+                <div id="divShape">
+                    <p>Shape</p>
+                    <button id="particle1"><i class="fa-solid fa-circle"></i></button>
+                    <button id="particle2"><i class="fa-solid fa-droplet"></i></button>
+                    <button id="particle3"><i class="fa-solid fa-grip-lines-vertical"></i></button>
+
+                </div>
+
+
+                <div id="divAmount">
+                    <p id="amountP">Amount</p>
+                    <input type="range" name="Slider" id="amount" class="slider" min="15" max="100" step="1" value="1">
+                </div>
+
+                <div id="divExplosion">
+                    <p>Explosion</p>
+                    <button id="explosion1">explosion1</button>
+                    <button id="explosion2">explosion2</button>
+                </div>
+
+            </div>
+
+            <div>
+                <button id="addRocket">Add Rocket</button>
+            </div>
+
+        </form>
+
+        <div id="divList">
+            <h3 id="RocketsList">test</h3>
+            <ul id="list"></ul>
+        </div>
+
+
+        <canvas id="canvas"></canvas>
+
+
+
+
 </body>
+
 </html>
