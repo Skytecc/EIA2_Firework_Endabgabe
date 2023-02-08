@@ -19,13 +19,19 @@ var Feuerwerk;
         }
         Feuerwerk.crc2 = canvas.getContext("2d");
         console.log("Canvas");
-        canvas.addEventListener("click", drawRocket);
+        canvas.addEventListener("click", testRocket);
         window.setInterval(update, 20);
     }
     function update() {
         //Update Funktion
         for (let circle of rockets) {
-            circle.draw;
+            circle.draw();
+            circle.update();
+            rockets.forEach((circle, i) => {
+                if (circle.alpha <= 0) {
+                    rockets.splice(i, 1);
+                }
+            });
         }
     }
     function drawRocket(_event) {
@@ -42,7 +48,24 @@ var Feuerwerk;
         let rgba2 = Math.floor(Math.random() * 255);
         let rgba3 = Math.floor(Math.random() * 255);
         let color = "RGB" + "(" + rgba1 + "," + rgba2 + "," + rgba3 + ")";
-        rockets.push(new Feuerwerk.Circle(position, "test", color, color));
+        //rockets.push(new Circle(position, "test", color, color));
+        console.log(rockets);
+    }
+    function testRocket(_event) {
+        let canvas = document.querySelector("#canvas");
+        let rect = canvas.getBoundingClientRect();
+        let positionX = _event.clientX - rect.left;
+        let positionY = _event.clientY - rect.top;
+        console.log(positionX, positionY);
+        let position = { x: positionX, y: positionY };
+        let dx = (Math.random() - 0.5) * (Math.random() * 6);
+        let dy = (Math.random() - 0.5) * (Math.random() * 6);
+        let radius = Math.random() * 3;
+        let rgba1 = Math.floor(Math.random() * 255);
+        let rgba2 = Math.floor(Math.random() * 255);
+        let rgba3 = Math.floor(Math.random() * 255);
+        let color = "RGB" + "(" + rgba1 + "," + rgba2 + "," + rgba3 + ")";
+        rockets.push(new Feuerwerk.Circle(position, "test", color, color, radius, dx, dy));
         console.log(rockets);
     }
 })(Feuerwerk || (Feuerwerk = {}));
