@@ -6,6 +6,7 @@ body {
 
 canvas {
     background-color: black;
+    height: 600px;
     float: right;
     margin-left: 70px;
     border-radius: 15px;
@@ -23,7 +24,7 @@ ul {
 
 #RocketsList {
     color: white;
-    margin-left: 130px;
+    margin-left: 105px;
 }
 
 #divList {
@@ -37,7 +38,7 @@ div {
 }
 
 h3 {
-    padding-left: 20px;
+    padding-left: 10px;
     margin-bottom: 40px;
 }
 
@@ -113,18 +114,18 @@ input[type="text"]:focus {
     margin-top: -10px;
 }
 
-#divAmount {
+#divSize {
     float: right;
     margin-right: 50px;
     margin-top: -10px;
     margin-bottom: 0px;
 }
 
-#amount {
+#size {
     margin-top: 0px;
 }
 
-#amountP {
+#sizeP {
     margin-left: 5px;
 }
 

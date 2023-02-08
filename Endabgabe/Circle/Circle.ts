@@ -1,29 +1,8 @@
 namespace Feuerwerk {
     export class Circle extends Rocket {
 
-        // dx, dy are the destination x and y position 
-
-        private radius: number;
-        
-        private dx: number;
-
-        private dy: number;
-        
-        constructor(_position: Vector, _name: string, _color1: string, _color2: string, _radius: number, _dx: number, _dy: number) {
-            super(_position, _name, _color1, _color2);
-
-            this.radius = _radius;
-            this.dx = _dx;
-            this.dy = _dy;
-        }
-
-        public update(): void {
-
-            this.draw();
-            this.alpha -= 0.01;
-            this.position.x += this.dx;
-            this.position.y += this.dy;
-
+        constructor(_position: Vector,  _dx: number, _dy: number, _size: number, _name: string, _color1: string, _color2: string) {
+            super(_position, _dx, _dy, _size , _name, _color1, _color2);
 
         }
 
@@ -35,8 +14,15 @@ namespace Feuerwerk {
 
             crc2.restore();
             
-            console.log("Ich werde gezeichnet!");
+            //console.log("Ich werde gezeichnet!");
 
+        }
+
+        public explode(): void {
+            this.draw();
+            this.alpha -= 0.01;
+            this.position.x += this.dx;
+            this.position.y += this.dy;
         }
 
 
