@@ -21,5 +21,9 @@ namespace Feuerwerk {
             // draw the target for this firework with a pulsing circle
             crc2.stroke();
         }
+
+        static test(): void {
+
+        }
     }
 }

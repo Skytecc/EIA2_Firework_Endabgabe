@@ -17,6 +17,8 @@ var Feuerwerk;
             // draw the target for this firework with a pulsing circle
             Feuerwerk.crc2.stroke();
         }
+        static test() {
+        }
     }
     Feuerwerk.Line = Line;
 })(Feuerwerk || (Feuerwerk = {}));
