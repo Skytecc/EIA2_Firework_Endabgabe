@@ -13,6 +13,8 @@ namespace Feuerwerk {
         y: number;
     }
 
+    let canvas: HTMLCanvasElement;
+
     //let rockets: Rocket[] = [];
 
     let particles: Rocket[] = [];
@@ -23,7 +25,7 @@ namespace Feuerwerk {
 
     function handleload(): void {
 
-        let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
+        canvas = <HTMLCanvasElement>document.querySelector("#canvas");
 
         // Siehe Canvas Lektion
         if (!canvas) {
@@ -68,7 +70,7 @@ namespace Feuerwerk {
 
             let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
             let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
-            let size: number = Math.random() * 3;
+            let size: number = 5;
 
             let circle: Rocket = new Circle(position, dx, dy, size, "testRocket", color, color);
 

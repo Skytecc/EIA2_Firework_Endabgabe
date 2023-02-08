@@ -2,22 +2,17 @@
 var Feuerwerk;
 (function (Feuerwerk) {
     class Line extends Feuerwerk.Rocket {
-        constructor(_position, _name, _color1, _color2) {
-            super(_position, _name, _color1, _color2);
-            this.draw();
+        constructor(_position, _dx, _dy, _size, _name, _color1, _color2) {
+            super(_position, _dx, _dy, _size, _name, _color1, _color2);
         }
         draw() {
-            Feuerwerk.crc2.beginPath();
-            // move to the last tracked coordinate in the set, then draw a line to the current x and y
-            Feuerwerk.crc2.moveTo();
-            Feuerwerk.crc2.lineTo(this.position.x, this.position.y);
-            Feuerwerk.crc2.strokeStyle = "black";
-            Feuerwerk.crc2.stroke();
-            Feuerwerk.crc2.beginPath();
-            // draw the target for this firework with a pulsing circle
-            Feuerwerk.crc2.stroke();
+            //
         }
-        static test() {
+        explode() {
+            this.draw();
+            this.alpha -= 0.01;
+            this.position.x += this.dx;
+            this.position.y += this.dy;
         }
     }
     Feuerwerk.Line = Line;
