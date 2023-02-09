@@ -74,7 +74,7 @@ namespace Feuerwerk {
 
             //
 
-            let circle: Rocket = new Circle(position, dx, dy, size, "testRocket", color, color);
+            let circle: Rocket = new Drop(position, dx, dy, size, "testRocket", color, color);
 
             particles.push(circle);
         }
