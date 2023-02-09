@@ -6,20 +6,17 @@ var Feuerwerk;
         // dx, dy are the destination x and y position 
         dx;
         dy;
-        size;
+        alphaTime;
         name;
-        color1;
-        color2;
+        color;
         alpha;
-        //public explosion: Vector;
-        constructor(_position, _dx, _dy, _size, _name, _color1, _color2) {
+        constructor(_position, _dx, _dy, _alphaTime, _name, _color) {
             this.position = _position;
             this.dx = _dx;
             this.dy = _dy;
-            this.size = _size;
+            this.alphaTime = _alphaTime;
             this.name = _name;
-            this.color1 = _color1;
-            this.color2 = _color2;
+            this.color = _color;
             this.alpha = 1;
         }
     }

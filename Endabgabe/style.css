@@ -114,22 +114,22 @@ input[type="text"]:focus {
     margin-top: -10px;
 }
 
-#divSize {
+#divAmount {
     float: right;
     margin-right: 50px;
     margin-top: -10px;
     margin-bottom: 0px;
 }
 
-#size {
+#lifetime {
     margin-top: 0px;
 }
 
-#sizeP {
+#lifetimeP {
     margin-left: 5px;
 }
 
-#divExplosion {
+#divLifetime {
     margin-left: 0px;
     margin-top: 0px;
 }
@@ -145,17 +145,6 @@ input[type="text"]:focus {
 
 .slider {
     height: 10px;
-}
-
-#explosion1, #explosion2 {
-    width: 110px;
-    height: 110px;
-    border-radius: 10px;
-    border: 1.5px solid black;
-}
-
-#explosion2 {
-    margin-left: 10px;
 }
 
 #addRocket {

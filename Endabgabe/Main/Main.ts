@@ -15,8 +15,6 @@ namespace Feuerwerk {
 
     let canvas: HTMLCanvasElement;
 
-    //let rockets: Rocket[] = [];
-
     let particles: Rocket[] = [];
 
     window.addEventListener("load", handleload);
@@ -57,29 +55,61 @@ namespace Feuerwerk {
         let positionX: number = _event.clientX - rect.left;
         let positionY: number = _event.clientY - rect.top;
         console.log(positionX, positionY);
-        
-        let rgba1: number = Math.floor(Math.random() * 255);
-        let rgba2: number = Math.floor(Math.random() * 255);
-        let rgba3: number = Math.floor(Math.random() * 255);
 
-        let color: string = "RGB" + "(" + rgba1 + "," + rgba2 + "," + rgba3 + ")";
+        // Get Formelements
 
-        for (let i: number = 0; i <= 10; i++) {
+        let formData: FormData = new FormData(document.forms[0]);
+
+        // Get Name
+        let name: string = <string>formData.get("Name")
+
+        // Get Color
+        let colorPicker1: string = <string>formData.get("Color1")
+        let colorPicker2: string = <string>formData.get("Color2")
+
+        // alphaTime/Lifetime
+        let lifetimeString: string = <string>formData.get("Lifetime");
+        let lifetime: number = parseInt(lifetimeString);
+
+        // Amount
+        let amountString: string = <string>formData.get("Amount");
+        let amount: number = parseInt(amountString);
+
+        console.log(amount + " hier ist Amount");
+
+        //console.log(colorPicker1);
+
+        // First color Particles
+
+        for (let i: number = 0; i <= amount; i++) {
 
             let position: Vector = { x: positionX, y: positionY };
 
             let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
             let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
-            let size: number = 5;
 
-            //
-
-            let circle: Rocket = new Drop(position, dx, dy, size, "testRocket", color, color);
+            let circle: Rocket = new Drop(position, dx, dy, lifetime, name, colorPicker1);
 
             particles.push(circle);
         }
 
-        console.log(particles);
+        // Second color Particles
+
+        for (let i: number = 0; i <= amount; i++) {
+
+            let position: Vector = { x: positionX, y: positionY };
+
+            let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
+            let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
+
+            let circle: Rocket = new Drop(position, dx, dy, lifetime, name, colorPicker2);
+
+            particles.push(circle);
+
+            console.log(circle);
+
+        }
+
     }
 
     function explosionAnimation(): void {
@@ -90,13 +120,13 @@ namespace Feuerwerk {
 
         crc2.clearRect(0, 0, canvas.width, canvas.height);
 
-        for (let circle of particles) {
-            if (circle.alpha <= 0) {
-              let index: number = particles.indexOf(circle);
+        for (let particle of particles) {
+            if (particle.alpha <= 0) {
+              let index: number = particles.indexOf(particle);
               particles.splice(index, 1);
             }
             else {
-              circle.explode(); 
+              particle.explode(); 
             }
           }
 

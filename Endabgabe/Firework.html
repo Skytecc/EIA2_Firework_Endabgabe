@@ -9,7 +9,7 @@
     <script src="Rocket/Rocket.js" ></script>
     <script src="Circle/Circle.js" ></script>
     <script src="Drop/Drop.js" ></script>
-    <script src="Line/Line.js" ></script>
+    <script src="Star/Star.js" ></script>
     <script src="Main/Main.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Firworks</title>
@@ -19,14 +19,14 @@
         <form action="">
             <h3>Create new rocket</h3>
             <div>
-                <input type="text" name="Text" id="name" placeholder="Rocket Name">
+                <input type="text" name="Name" id="name" placeholder="Rocket Name">
             </div>
 
             <div>
                 <p id="pColor1"> Color 1</p>
-                <input type="color" name="Color" id="color1">
+                <input type="color" name="Color1" id="color1">
                 <p id="pColor2">Color 2</p>
-                <input type="color" name="Color" id="color2">
+                <input type="color" name="Color2" id="color2">
             </div>
 
             <div>
@@ -40,15 +40,14 @@
                 </div>
 
 
-                <div id="divSize">
-                    <p id="sizeP">size</p>
-                    <input type="range" name="size" id="size" class="slider" min="1" max="10" step="1" value="5">
+                <div id="divAmount">
+                    <p id="AmountP">Amount</p>
+                    <input type="range" name="Amount" id="amount" class="slider" min="5" max="10" step="1" value="5">
                 </div>
 
-                <div id="divExplosion">
-                    <p>Explosion</p>
-                    <button id="explosion1">explosion1</button>
-                    <button id="explosion2">explosion2</button>
+                <div id="divLifetime">
+                    <p>Lifetime</p>
+                    <input type="range" name="Lifetime" id="lifetime" class="slider" min="1" max="5" step="1" value="5">
                 </div>
 
             </div>
@@ -66,9 +65,6 @@
 
 
         <canvas id="canvas" width="800" height="600"></canvas>
-
-
-
 
 </body>
 
