@@ -23,6 +23,7 @@ var Feuerwerk;
             Feuerwerk.crc2.arc(_x, _y, _radius, _startAngle, _endAngle * Math.PI);
             Feuerwerk.crc2.fillStyle = _color;
             Feuerwerk.crc2.fill();
+            Feuerwerk.crc2.save();
             Feuerwerk.crc2.closePath();
         }
     }

@@ -42,6 +42,7 @@ var Feuerwerk;
             let dx = (Math.random() - 0.5) * (Math.random() * 6);
             let dy = (Math.random() - 0.5) * (Math.random() * 6);
             let size = 5;
+            //
             let circle = new Feuerwerk.Circle(position, dx, dy, size, "testRocket", color, color);
             particles.push(circle);
         }

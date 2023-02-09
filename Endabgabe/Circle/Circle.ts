@@ -13,7 +13,7 @@ namespace Feuerwerk {
             this.drawArc(this.position.x, this.position.y, 5, 0, 2 * Math.PI, "red");
 
             crc2.restore();
-            
+
             //console.log("Ich werde gezeichnet!");
 
         }
@@ -32,6 +32,7 @@ namespace Feuerwerk {
             crc2.arc(_x, _y, _radius, _startAngle, _endAngle * Math.PI);
             crc2.fillStyle = _color;
             crc2.fill();
+            crc2.save();
             crc2.closePath();
         }
 

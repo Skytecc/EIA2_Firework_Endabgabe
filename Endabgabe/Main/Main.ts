@@ -72,6 +72,8 @@ namespace Feuerwerk {
             let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
             let size: number = 5;
 
+            //
+
             let circle: Rocket = new Circle(position, dx, dy, size, "testRocket", color, color);
 
             particles.push(circle);
@@ -99,8 +101,6 @@ namespace Feuerwerk {
           }
 
         //console.log(particles);
-
     }
-
 
 }
