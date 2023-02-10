@@ -22,6 +22,7 @@ var Feuerwerk;
         }
         drawTriangle(_x1, _y1, _x2, _y2, _x3, _y3, _color) {
             Feuerwerk.crc2.beginPath();
+            Feuerwerk.crc2.globalAlpha = this.alpha;
             Feuerwerk.crc2.moveTo(_x1, _y1);
             Feuerwerk.crc2.lineTo(_x2, _y2);
             Feuerwerk.crc2.lineTo(_x3, _y3);
@@ -32,4 +33,4 @@ var Feuerwerk;
     }
     Feuerwerk.Star = Star;
 })(Feuerwerk || (Feuerwerk = {}));
-//# sourceMappingURL=star.js.map
+//# sourceMappingURL=Star.js.map
