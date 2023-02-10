@@ -155,7 +155,6 @@ namespace Feuerwerk {
                 /*let url: string = "https:webuser.hs-furtwangen.de/~nguyenki/Database/?";
                 let query: URLSearchParams = new URLSearchParams(<any>formData);
                 await fetch(url + "?" + query.toString());
-
                 alert("New added Item");
             }*/
             }
