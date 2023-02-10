@@ -24,6 +24,7 @@ namespace Feuerwerk {
 
         public drawTriangle(_x1: number, _y1: number, _x2: number, _y2: number, _x3: number, _y3: number, _color: string): void {
             crc2.beginPath();
+            crc2.globalAlpha = this.alpha;
             crc2.moveTo(_x1, _y1);
             crc2.lineTo(_x2, _y2);
             crc2.lineTo(_x3, _y3);
