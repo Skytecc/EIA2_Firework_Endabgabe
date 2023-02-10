@@ -20,12 +20,14 @@ var Feuerwerk;
         Feuerwerk.crc2 = canvas.getContext("2d");
         console.log("Canvas");
         canvas.addEventListener("click", Rocket);
+        canvas.addEventListener("click", sendItem);
         window.setInterval(update, 20);
     }
     function update() {
         //Update Funktion
         requestAnimationFrame(explosionAnimation);
     }
+    Feuerwerk.update = update;
     function Rocket(_event) {
         let canvas = document.querySelector("#canvas");
         let rect = canvas.getBoundingClientRect();
@@ -79,6 +81,24 @@ var Feuerwerk;
             }
         }
         //console.log(particles);
+    }
+    async function sendItem(_event) {
+        console.log("Send to server");
+        let formData = new FormData(document.forms[0]);
+        let json = {};
+        for (let key of formData.keys())
+            if (!json[key]) {
+                let values = formData.getAll(key); // get all elements
+                json[key] = values.length > 1 ? values : values[0];
+                console.log(values);
+                // get all the elements in formdata
+                /*let url: string = "https:webuser.hs-furtwangen.de/~nguyenki/Database/?";
+                let query: URLSearchParams = new URLSearchParams(<any>formData);
+                await fetch(url + "?" + query.toString());
+
+                alert("New added Item");
+            }*/
+            }
     }
 })(Feuerwerk || (Feuerwerk = {}));
 //# sourceMappingURL=Main.js.map

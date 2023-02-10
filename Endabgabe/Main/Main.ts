@@ -13,6 +13,10 @@ namespace Feuerwerk {
         y: number;
     }
 
+    export interface FormDataJSON {
+        [key: string]: FormDataEntryValue | FormDataEntryValue[];
+    }
+
     let canvas: HTMLCanvasElement;
 
     let particles: Rocket[] = [];
@@ -34,12 +38,13 @@ namespace Feuerwerk {
         console.log("Canvas");
 
         canvas.addEventListener("click", Rocket);
+        canvas.addEventListener("click", sendItem);
 
         window.setInterval(update, 20);
 
     }
 
-    function update(): void {
+    export function update(): void {
         //Update Funktion
 
         requestAnimationFrame(explosionAnimation);
@@ -64,8 +69,8 @@ namespace Feuerwerk {
         let name: string = <string>formData.get("Name")
 
         // Get Color
-        let colorPicker1: string = <string>formData.get("Color1")
-        let colorPicker2: string = <string>formData.get("Color2")
+        let colorPicker1: string = <string>formData.get("Color1");
+        let colorPicker2: string = <string>formData.get("Color2");
 
         // alphaTime/Lifetime
         let lifetimeString: string = <string>formData.get("Lifetime");
@@ -132,5 +137,29 @@ namespace Feuerwerk {
 
         //console.log(particles);
     }
+
+    
+    async function sendItem(_event: MouseEvent): Promise<void> {
+        console.log("Send to server");
+        let formData: FormData = new FormData(document.forms[0]);
+        let json: FormDataJSON = {};
+
+
+        for (let key of formData.keys())
+            if (!json[key]) {
+                let values: FormDataEntryValue[] = formData.getAll(key); // get all elements
+                json[key] = values.length > 1 ? values : values[0];
+                console.log(values);
+                // get all the elements in formdata
+
+                /*let url: string = "https:webuser.hs-furtwangen.de/~nguyenki/Database/?";
+                let query: URLSearchParams = new URLSearchParams(<any>formData);
+                await fetch(url + "?" + query.toString());
+
+                alert("New added Item");
+            }*/
+            }
+
+        }
 
 }

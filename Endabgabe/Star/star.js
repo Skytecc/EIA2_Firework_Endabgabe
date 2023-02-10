@@ -32,4 +32,4 @@ var Feuerwerk;
     }
     Feuerwerk.Star = Star;
 })(Feuerwerk || (Feuerwerk = {}));
-//# sourceMappingURL=Star.js.map
+//# sourceMappingURL=star.js.map
