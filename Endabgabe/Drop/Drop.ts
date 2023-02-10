@@ -14,10 +14,7 @@ namespace Feuerwerk {
         }
 
         public explode(): void {
-            this.draw();
-            this.alpha -= this.alphaTime / 100;
-            this.position.x += this.dx;
-            this.position.y += this.dy;
+            super.explode();
         }
 
         private drawArc(_x: number, _y: number, _radius: number, _startAngle: number, _endAngle: number): void {

@@ -15,10 +15,7 @@ var Feuerwerk;
             Feuerwerk.crc2.restore();
         }
         explode() {
-            this.draw();
-            this.alpha -= this.alphaTime / 100;
-            this.position.x += this.dx;
-            this.position.y += this.dy;
+            super.explode();
         }
         drawTriangle(_x1, _y1, _x2, _y2, _x3, _y3, _color) {
             Feuerwerk.crc2.beginPath();

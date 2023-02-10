@@ -19,6 +19,12 @@ var Feuerwerk;
             this.color = _color;
             this.alpha = 1;
         }
+        explode() {
+            this.draw();
+            this.alpha -= this.alphaTime / 100;
+            this.position.x += this.dx;
+            this.position.y += this.dy;
+        }
     }
     Feuerwerk.Rocket = Rocket;
 })(Feuerwerk || (Feuerwerk = {}));

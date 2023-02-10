@@ -14,10 +14,7 @@ var Feuerwerk;
             //console.log("Ich werde gezeichnet!");
         }
         explode() {
-            this.draw();
-            this.alpha -= this.alphaTime / 100;
-            this.position.x += this.dx;
-            this.position.y += this.dy;
+            super.explode();
         }
         drawArc(_x, _y, _radius, _startAngle, _endAngle) {
             Feuerwerk.crc2.beginPath();

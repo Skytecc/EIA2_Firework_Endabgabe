@@ -23,10 +23,7 @@ namespace Feuerwerk {
         }
 
         public explode(): void {
-            this.draw();
-            this.alpha -= this.alphaTime / 100;
-            this.position.x += this.dx;
-            this.position.y += this.dy;
+            super.explode();
         }
 
 
