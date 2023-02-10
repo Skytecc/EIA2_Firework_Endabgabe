@@ -17,6 +17,14 @@ namespace Feuerwerk {
         [key: string]: FormDataEntryValue | FormDataEntryValue[];
     }
 
+    export enum SHAPE {
+        CIRCLE,
+        DROP,
+        STAR
+    }
+
+    export let currentShape: Rocket;
+
     let canvas: HTMLCanvasElement;
 
     let particles: Rocket[] = [];
@@ -37,8 +45,9 @@ namespace Feuerwerk {
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
         console.log("Canvas");
 
-        canvas.addEventListener("click", Rocket);
+        canvas.addEventListener("click", addRocket);
         canvas.addEventListener("click", sendItem);
+
 
         window.setInterval(update, 20);
 
@@ -51,17 +60,19 @@ namespace Feuerwerk {
 
     }
 
-    function Rocket(_event: MouseEvent): void {
+    function addRocket(_event: MouseEvent): void {
 
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
 
+        // DomRect = getBoundingClientrect gibt wieder an wlecher Position das Objekt auf dem HTML ist.
+        // Bzw, um genauer zu sein wo das Canvas ist. Es positioniert dieses und somit kann man die x und y Werte vom Canvas lesen
         let rect: DOMRect = canvas.getBoundingClientRect();
 
         let positionX: number = _event.clientX - rect.left;
         let positionY: number = _event.clientY - rect.top;
         console.log(positionX, positionY);
 
-        // Get Formelements
+        // Get Formlements
 
         let formData: FormData = new FormData(document.forms[0]);
 
@@ -70,7 +81,7 @@ namespace Feuerwerk {
 
         // Get Color
         let colorPicker1: string = <string>formData.get("Color1");
-        let colorPicker2: string = <string>formData.get("Color2");
+        //let colorPicker2: string = <string>formData.get("Color2");
 
         // alphaTime/Lifetime
         let lifetimeString: string = <string>formData.get("Lifetime");
@@ -81,6 +92,15 @@ namespace Feuerwerk {
         let amount: number = parseInt(amountString);
 
         console.log(amount + " hier ist Amount");
+
+        // Gett String from formdata
+
+        let targetShape: string = <string>formData.get("Shape");
+        console.log(targetShape);
+
+        let currentShape: string = <string>targetShape;
+
+        let currentParticle: Rocket;
 
         //console.log(colorPicker1);
 
@@ -93,14 +113,25 @@ namespace Feuerwerk {
             let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
             let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
 
-            let circle: Rocket = new Drop(position, dx, dy, lifetime, name, colorPicker1);
-
-            particles.push(circle);
+            switch(currentShape) {
+                case "circle":
+                    currentParticle = new Circle(position, dx, dy, lifetime, name, colorPicker1);
+                    break;
+                case "drop":
+                    currentParticle = new Drop(position, dx, dy, lifetime, name, colorPicker1);
+                    break;
+                case "star":
+                    currentParticle = new Star(position, dx, dy, lifetime, name, colorPicker1);
+                    break;
+                default:
+                return;
+            }
+            particles.push(currentParticle);
         }
 
         // Second color Particles
 
-        for (let i: number = 0; i <= amount; i++) {
+        /* for (let i: number = 0; i <= amount; i++) {
 
             let position: Vector = { x: positionX, y: positionY };
 
@@ -113,7 +144,7 @@ namespace Feuerwerk {
 
             console.log(circle);
 
-        }
+        } */
 
     }
 
@@ -127,18 +158,18 @@ namespace Feuerwerk {
 
         for (let particle of particles) {
             if (particle.alpha <= 0) {
-              let index: number = particles.indexOf(particle);
-              particles.splice(index, 1);
+                let index: number = particles.indexOf(particle);
+                particles.splice(index, 1);
             }
             else {
-              particle.explode(); 
+                particle.explode();
             }
-          }
+        }
 
         //console.log(particles);
     }
 
-    
+
     async function sendItem(_event: MouseEvent): Promise<void> {
         console.log("Send to server");
         let formData: FormData = new FormData(document.forms[0]);
@@ -159,6 +190,6 @@ namespace Feuerwerk {
             }*/
             }
 
-        }
+    }
 
 }

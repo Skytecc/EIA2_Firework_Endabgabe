@@ -7,6 +7,7 @@ var Feuerwerk;
         }
         draw() {
             Feuerwerk.crc2.save();
+            Feuerwerk.crc2.translate(-20, 180);
             this.drawTriangle(this.position.x + 7.5, this.position.y - 170, this.position.x + 15, this.position.y - 190, this.position.x + 22.5, this.position.y - 170, this.color); // oben
             this.drawTriangle(this.position.x + 7.5, this.position.y - 170, this.position.x + 0, this.position.y - 155, this.position.x + 22.5, this.position.y - 170, this.color); // unten links
             this.drawTriangle(this.position.x + 7.5, this.position.y - 170, this.position.x + 30, this.position.y - 155, this.position.x + 22.5, this.position.y - 170, this.color); // unten rechts
