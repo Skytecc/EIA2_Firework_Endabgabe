@@ -22,9 +22,8 @@ namespace Feuerwerk {
     export let crc2: CanvasRenderingContext2D;
 
     async function handleload(): Promise<void> {
-
         
-        let response: Response = await fetch("https://webuser.hs-furtwangen.de/~nguyenki/Database/?command=find&collection=Items");
+        let response: Response = await fetch("https://webuser.hs-furtwangen.de/~nguyenki/Database/?command=find&collection=Rocketlist");
         let offer: string = await response.text();
         //console.log(offer);
         let dataJson: DataEntries = JSON.parse(offer);
@@ -48,8 +47,7 @@ namespace Feuerwerk {
         let addButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#addRocket");
         addButton.addEventListener("click", addRocket);
 
-        canvas.addEventListener("click", sendItem);
-
+        showSavedRockets(dataJson);
 
         window.setInterval(update, 20);
 
@@ -187,6 +185,8 @@ namespace Feuerwerk {
         newRocket.appendChild(deleteButton);
 
         divRocket.addEventListener("click", deleteRocket);
+
+        sendItem();
 
     }
 

@@ -12,7 +12,7 @@ var Feuerwerk;
     let particles = [];
     window.addEventListener("load", handleload);
     async function handleload() {
-        let response = await fetch("https://webuser.hs-furtwangen.de/~nguyenki/Database/?command=find&collection=Items");
+        let response = await fetch("https://webuser.hs-furtwangen.de/~nguyenki/Database/?command=find&collection=Rocketlist");
         let offer = await response.text();
         //console.log(offer);
         let dataJson = JSON.parse(offer);
@@ -30,7 +30,7 @@ var Feuerwerk;
         canvas.addEventListener("click", createRocket);
         let addButton = document.querySelector("#addRocket");
         addButton.addEventListener("click", addRocket);
-        canvas.addEventListener("click", Feuerwerk.sendItem);
+        Feuerwerk.showSavedRockets(dataJson);
         window.setInterval(update, 20);
     }
     function update() {
@@ -129,6 +129,7 @@ var Feuerwerk;
         deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
         newRocket.appendChild(deleteButton);
         divRocket.addEventListener("click", deleteRocket);
+        Feuerwerk.sendItem();
     }
     function deleteRocket(_event) {
         let target = _event.target;
