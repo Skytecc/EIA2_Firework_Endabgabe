@@ -12,19 +12,7 @@ namespace Feuerwerk {
         x: number;
         y: number;
     }
-
-    export interface FormDataJSON {
-        [key: string]: FormDataEntryValue | FormDataEntryValue[];
-    }
-
-    export enum SHAPE {
-        CIRCLE,
-        DROP,
-        STAR
-    }
-
-    export let currentShape: Rocket;
-
+    
     let canvas: HTMLCanvasElement;
 
     let particles: Rocket[] = [];
@@ -33,7 +21,17 @@ namespace Feuerwerk {
 
     export let crc2: CanvasRenderingContext2D;
 
-    function handleload(): void {
+    async function handleload(): Promise<void> {
+
+        
+        let response: Response = await fetch("https://webuser.hs-furtwangen.de/~nguyenki/Database/?command=find&collection=Items");
+        let offer: string = await response.text();
+        //console.log(offer);
+        let dataJson: DataEntries = JSON.parse(offer);
+        console.log("hier startet data.json");
+        console.log(dataJson.data);
+        //console.log("Response", response);
+        //console.log(dataJson);
 
         canvas = <HTMLCanvasElement>document.querySelector("#canvas");
 
@@ -45,7 +43,11 @@ namespace Feuerwerk {
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
         console.log("Canvas");
 
-        canvas.addEventListener("click", addRocket);
+        canvas.addEventListener("click", createRocket);
+
+        let addButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#addRocket");
+        addButton.addEventListener("click", addRocket);
+
         canvas.addEventListener("click", sendItem);
 
 
@@ -55,12 +57,11 @@ namespace Feuerwerk {
 
     export function update(): void {
         //Update Funktion
-
-        requestAnimationFrame(explosionAnimation);
+        requestAnimationFrame(animateExplosion);
 
     }
 
-    function addRocket(_event: MouseEvent): void {
+    function createRocket(_event: MouseEvent): void {
 
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
 
@@ -81,7 +82,7 @@ namespace Feuerwerk {
 
         // Get Color
         let colorPicker1: string = <string>formData.get("Color1");
-        //let colorPicker2: string = <string>formData.get("Color2");
+        let colorPicker2: string = <string>formData.get("Color2");
 
         // alphaTime/Lifetime
         let lifetimeString: string = <string>formData.get("Lifetime");
@@ -108,6 +109,14 @@ namespace Feuerwerk {
 
         for (let i: number = 0; i <= amount; i++) {
 
+            let color: string;
+
+            if( i < amount/2 ) {
+                color = colorPicker1;
+            }else {
+                color = colorPicker2;
+            }
+
             let position: Vector = { x: positionX, y: positionY };
 
             let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
@@ -115,13 +124,13 @@ namespace Feuerwerk {
 
             switch(currentShape) {
                 case "circle":
-                    currentParticle = new Circle(position, dx, dy, lifetime, name, colorPicker1);
+                    currentParticle = new Circle(position, dx, dy, lifetime, name, color);
                     break;
                 case "drop":
-                    currentParticle = new Drop(position, dx, dy, lifetime, name, colorPicker1);
+                    currentParticle = new Drop(position, dx, dy, lifetime, name, color);
                     break;
                 case "star":
-                    currentParticle = new Star(position, dx, dy, lifetime, name, colorPicker1);
+                    currentParticle = new Star(position, dx, dy, lifetime, name, color);
                     break;
                 default:
                 return;
@@ -129,26 +138,9 @@ namespace Feuerwerk {
             particles.push(currentParticle);
         }
 
-        // Second color Particles
-
-        /* for (let i: number = 0; i <= amount; i++) {
-
-            let position: Vector = { x: positionX, y: positionY };
-
-            let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
-            let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
-
-            let circle: Rocket = new Drop(position, dx, dy, lifetime, name, colorPicker2);
-
-            particles.push(circle);
-
-            console.log(circle);
-
-        } */
-
     }
 
-    function explosionAnimation(): void {
+    function animateExplosion(): void {
 
         // making particle Animation that it fades and splices from Array
 
@@ -169,27 +161,43 @@ namespace Feuerwerk {
         //console.log(particles);
     }
 
+    function addRocket(_event: MouseEvent): void {
+        let rocketList: HTMLElement = <HTMLElement>document.getElementById("list");
+      
+        let name: HTMLInputElement = <HTMLInputElement>document.querySelector("#name");
+        
+        let divRocket: HTMLDivElement = <HTMLDivElement>document.createElement("div");
+        divRocket.classList.add("divNewRocket");
+        rocketList.appendChild(divRocket);
 
-    async function sendItem(_event: MouseEvent): Promise<void> {
-        console.log("Send to server");
-        let formData: FormData = new FormData(document.forms[0]);
-        let json: FormDataJSON = {};
+        let radiobutton: HTMLButtonElement = <HTMLButtonElement>document.createElement("input");
+        radiobutton.classList.add("radiobutton");
+        radiobutton.type = "radio";
+        radiobutton.name = "Rocket";
+        divRocket.appendChild(radiobutton);
 
+        let newRocket: HTMLParagraphElement = document.createElement("p");
+        newRocket.classList.add("name");
+        divRocket.appendChild(newRocket);
+        newRocket.innerHTML = name.value;
 
-        for (let key of formData.keys())
-            if (!json[key]) {
-                let values: FormDataEntryValue[] = formData.getAll(key); // get all elements
-                json[key] = values.length > 1 ? values : values[0];
-                console.log(values);
-                // get all the elements in formdata
+        let deleteButton: HTMLDivElement = document.createElement("div");
+        deleteButton.classList.add("deleteButton");
+        deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
+        newRocket.appendChild(deleteButton);
 
-                /*let url: string = "https:webuser.hs-furtwangen.de/~nguyenki/Database/?";
-                let query: URLSearchParams = new URLSearchParams(<any>formData);
-                await fetch(url + "?" + query.toString());
-                alert("New added Item");
-            }*/
-            }
+        divRocket.addEventListener("click", deleteRocket);
 
+    }
+
+    export function deleteRocket(_event: MouseEvent): void {
+        let target: HTMLElement = <HTMLElement>_event.target;
+        let currentTarget: HTMLElement = <HTMLElement>_event.currentTarget;
+        let parentElement: HTMLElement = <HTMLElement>currentTarget.parentElement;
+
+        if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
+            parentElement.removeChild(currentTarget);
+        }
     }
 
 }

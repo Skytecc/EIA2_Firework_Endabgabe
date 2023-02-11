@@ -1,13 +1,17 @@
 namespace Feuerwerk {
     export class Drop extends Rocket {
 
+        private radius: number;
+
         constructor(_position: Vector, _dx: number, _dy: number, _alphaTime: number, _name: string, _color: string) {
             super(_position, _dx, _dy, _alphaTime, _name, _color);
+
+            this.radius = 5;
         }
 
         public draw(): void {
             crc2.save();
-            this.drawArc(this.position.x, this.position.y, 5, 0, 2 * Math.PI);
+            this.drawArc(this.position.x, this.position.y, this.radius, 0, 2 * Math.PI);
             this.drawTriangle(this.position.x - 3, this.position.y - 4, this.position.x + 3, this.position.y - 4, this.position.x + 0, this.position.y - 10);
             crc2.restore();
             //console.log("draw");

@@ -8,16 +8,18 @@ Quellen: <Ann-Kathrin Haas>
 */
 var Feuerwerk;
 (function (Feuerwerk) {
-    let SHAPE;
-    (function (SHAPE) {
-        SHAPE[SHAPE["CIRCLE"] = 0] = "CIRCLE";
-        SHAPE[SHAPE["DROP"] = 1] = "DROP";
-        SHAPE[SHAPE["STAR"] = 2] = "STAR";
-    })(SHAPE = Feuerwerk.SHAPE || (Feuerwerk.SHAPE = {}));
     let canvas;
     let particles = [];
     window.addEventListener("load", handleload);
-    function handleload() {
+    async function handleload() {
+        let response = await fetch("https://webuser.hs-furtwangen.de/~nguyenki/Database/?command=find&collection=Items");
+        let offer = await response.text();
+        //console.log(offer);
+        let dataJson = JSON.parse(offer);
+        console.log("hier startet data.json");
+        console.log(dataJson.data);
+        //console.log("Response", response);
+        //console.log(dataJson);
         canvas = document.querySelector("#canvas");
         // Siehe Canvas Lektion
         if (!canvas) {
@@ -25,16 +27,18 @@ var Feuerwerk;
         }
         Feuerwerk.crc2 = canvas.getContext("2d");
         console.log("Canvas");
-        canvas.addEventListener("click", addRocket);
-        canvas.addEventListener("click", sendItem);
+        canvas.addEventListener("click", createRocket);
+        let addButton = document.querySelector("#addRocket");
+        addButton.addEventListener("click", addRocket);
+        canvas.addEventListener("click", Feuerwerk.sendItem);
         window.setInterval(update, 20);
     }
     function update() {
         //Update Funktion
-        requestAnimationFrame(explosionAnimation);
+        requestAnimationFrame(animateExplosion);
     }
     Feuerwerk.update = update;
-    function addRocket(_event) {
+    function createRocket(_event) {
         let canvas = document.querySelector("#canvas");
         // DomRect = getBoundingClientrect gibt wieder an wlecher Position das Objekt auf dem HTML ist.
         // Bzw, um genauer zu sein wo das Canvas ist. Es positioniert dieses und somit kann man die x und y Werte vom Canvas lesen
@@ -48,7 +52,7 @@ var Feuerwerk;
         let name = formData.get("Name");
         // Get Color
         let colorPicker1 = formData.get("Color1");
-        //let colorPicker2: string = <string>formData.get("Color2");
+        let colorPicker2 = formData.get("Color2");
         // alphaTime/Lifetime
         let lifetimeString = formData.get("Lifetime");
         let lifetime = parseInt(lifetimeString);
@@ -64,41 +68,33 @@ var Feuerwerk;
         //console.log(colorPicker1);
         // First color Particles
         for (let i = 0; i <= amount; i++) {
+            let color;
+            if (i < amount / 2) {
+                color = colorPicker1;
+            }
+            else {
+                color = colorPicker2;
+            }
             let position = { x: positionX, y: positionY };
             let dx = (Math.random() - 0.5) * (Math.random() * 6);
             let dy = (Math.random() - 0.5) * (Math.random() * 6);
             switch (currentShape) {
                 case "circle":
-                    currentParticle = new Feuerwerk.Circle(position, dx, dy, lifetime, name, colorPicker1);
+                    currentParticle = new Feuerwerk.Circle(position, dx, dy, lifetime, name, color);
                     break;
                 case "drop":
-                    currentParticle = new Feuerwerk.Drop(position, dx, dy, lifetime, name, colorPicker1);
+                    currentParticle = new Feuerwerk.Drop(position, dx, dy, lifetime, name, color);
                     break;
                 case "star":
-                    currentParticle = new Feuerwerk.Star(position, dx, dy, lifetime, name, colorPicker1);
+                    currentParticle = new Feuerwerk.Star(position, dx, dy, lifetime, name, color);
                     break;
                 default:
                     return;
             }
             particles.push(currentParticle);
         }
-        // Second color Particles
-        /* for (let i: number = 0; i <= amount; i++) {
-
-            let position: Vector = { x: positionX, y: positionY };
-
-            let dx: number = (Math.random() - 0.5) * (Math.random() * 6);
-            let dy: number = (Math.random() - 0.5) * (Math.random() * 6);
-
-            let circle: Rocket = new Drop(position, dx, dy, lifetime, name, colorPicker2);
-
-            particles.push(circle);
-
-            console.log(circle);
-
-        } */
     }
-    function explosionAnimation() {
+    function animateExplosion() {
         // making particle Animation that it fades and splices from Array
         let canvas = document.querySelector("#canvas");
         Feuerwerk.crc2.clearRect(0, 0, canvas.width, canvas.height);
@@ -113,22 +109,35 @@ var Feuerwerk;
         }
         //console.log(particles);
     }
-    async function sendItem(_event) {
-        console.log("Send to server");
-        let formData = new FormData(document.forms[0]);
-        let json = {};
-        for (let key of formData.keys())
-            if (!json[key]) {
-                let values = formData.getAll(key); // get all elements
-                json[key] = values.length > 1 ? values : values[0];
-                console.log(values);
-                // get all the elements in formdata
-                /*let url: string = "https:webuser.hs-furtwangen.de/~nguyenki/Database/?";
-                let query: URLSearchParams = new URLSearchParams(<any>formData);
-                await fetch(url + "?" + query.toString());
-                alert("New added Item");
-            }*/
-            }
+    function addRocket(_event) {
+        let rocketList = document.getElementById("list");
+        let name = document.querySelector("#name");
+        let divRocket = document.createElement("div");
+        divRocket.classList.add("divNewRocket");
+        rocketList.appendChild(divRocket);
+        let radiobutton = document.createElement("input");
+        radiobutton.classList.add("radiobutton");
+        radiobutton.type = "radio";
+        radiobutton.name = "Rocket";
+        divRocket.appendChild(radiobutton);
+        let newRocket = document.createElement("p");
+        newRocket.classList.add("name");
+        divRocket.appendChild(newRocket);
+        newRocket.innerHTML = name.value;
+        let deleteButton = document.createElement("div");
+        deleteButton.classList.add("deleteButton");
+        deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
+        newRocket.appendChild(deleteButton);
+        divRocket.addEventListener("click", deleteRocket);
     }
+    function deleteRocket(_event) {
+        let target = _event.target;
+        let currentTarget = _event.currentTarget;
+        let parentElement = currentTarget.parentElement;
+        if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
+            parentElement.removeChild(currentTarget);
+        }
+    }
+    Feuerwerk.deleteRocket = deleteRocket;
 })(Feuerwerk || (Feuerwerk = {}));
 //# sourceMappingURL=Main.js.map
