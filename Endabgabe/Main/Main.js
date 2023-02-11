@@ -76,8 +76,8 @@ var Feuerwerk;
                 color = colorPicker2;
             }
             let position = { x: positionX, y: positionY };
-            let dx = (Math.random() - 0.5) * (Math.random() * 6);
-            let dy = (Math.random() - 0.5) * (Math.random() * 6);
+            let dx = (Math.random() - 0.5) * (Math.random() * 10);
+            let dy = (Math.random() - 0.5) * (Math.random() * 10);
             switch (currentShape) {
                 case "circle":
                     currentParticle = new Feuerwerk.Circle(position, dx, dy, lifetime, name, color);
@@ -115,11 +115,9 @@ var Feuerwerk;
         let divRocket = document.createElement("div");
         divRocket.classList.add("divNewRocket");
         rocketList.appendChild(divRocket);
-        let radiobutton = document.createElement("input");
-        radiobutton.classList.add("radiobutton");
-        radiobutton.type = "radio";
-        radiobutton.name = "Rocket";
-        divRocket.appendChild(radiobutton);
+        let editButton = document.createElement("div");
+        editButton.classList.add("fa-solid", "fa-pen-to-square", "editbutton");
+        divRocket.appendChild(editButton);
         let newRocket = document.createElement("p");
         newRocket.classList.add("name");
         divRocket.appendChild(newRocket);
@@ -129,13 +127,17 @@ var Feuerwerk;
         deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
         newRocket.appendChild(deleteButton);
         divRocket.addEventListener("click", deleteRocket);
+        editButton.addEventListener("click", deleteRocket);
         Feuerwerk.sendItem();
+        window.setInterval(function () {
+            window.location.reload();
+        }, 100);
     }
     function deleteRocket(_event) {
         let target = _event.target;
         let currentTarget = _event.currentTarget;
         let parentElement = currentTarget.parentElement;
-        if (target.classList.contains("deleteButton") || target.classList.contains("trash")) {
+        if (target.classList.contains("deleteButton") || target.classList.contains("trash") || target.classList.contains("editbutton")) {
             parentElement.removeChild(currentTarget);
         }
     }

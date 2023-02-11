@@ -3,6 +3,7 @@ var Feuerwerk;
 (function (Feuerwerk) {
     //Funktion um die Datenbankliste anzeigen zu lassen
     function showSavedRockets(_data) {
+        let formData = new FormData(document.forms[0]);
         console.log(_data);
         // Neue Liste wird kreiert um die entries ID in einer seperaten Liste zu bekommen (Kannst du mit console.log(entries[x]) probieren)
         // x ist die Array stelle, falls man es überprüfen will
@@ -23,11 +24,9 @@ var Feuerwerk;
             let divRocket = document.createElement("div");
             divRocket.classList.add("divNewRocket");
             rocketList.appendChild(divRocket);
-            let radiobutton = document.createElement("input");
-            radiobutton.classList.add("radiobutton");
-            radiobutton.type = "radio";
-            radiobutton.name = "Rocket";
-            divRocket.appendChild(radiobutton);
+            let editButton = document.createElement("div");
+            editButton.classList.add("fa-solid", "fa-pen-to-square", "editbutton");
+            divRocket.appendChild(editButton);
             let newRocket = document.createElement("p");
             newRocket.classList.add("name");
             divRocket.appendChild(newRocket);
@@ -37,7 +36,14 @@ var Feuerwerk;
             deleteButton.innerHTML = '<i class = "trash fas fa-trash-alt"></i>';
             newRocket.appendChild(deleteButton);
             divRocket.addEventListener("click", Feuerwerk.deleteRocket);
+            /* divRocket.addEventListener("click", deleteRocket);
+            deleteButton.addEventListener("click", function (): void {
+                removeFromDatalist(entryID); */
             deleteButton.addEventListener("click", function () {
+                removeFromDatalist(entryID);
+            });
+            editButton.addEventListener("click", function () {
+                editRocket(entry.Name, entry.Color1, entry.Color2, entry.Shape, entry.Amount, entry.Lifetime);
                 removeFromDatalist(entryID);
             });
             /*    console.log("Hier ist entryID");
@@ -82,5 +88,71 @@ var Feuerwerk;
         console.log(_dataID);
     }
     Feuerwerk.removeFromDatalist = removeFromDatalist;
+    function editRocket(_rocketName, _color1, _color2, _shape, _amount, _lifeTime) {
+        console.log("edit list element");
+        let name = document.querySelector("#name");
+        name.value = _rocketName;
+        let color1 = document.querySelector("#color1");
+        color1.value = _color1;
+        let color2 = document.querySelector("#color2");
+        color2.value = _color2;
+        /*    let shape: HTMLInputElement = <HTMLInputElement>document.querySelector(".radioShape");
+           shape.value = _shape; */
+        let amount = document.querySelector("#amount");
+        amount.value = _amount;
+        let lifetime = document.querySelector("#lifetime");
+        lifetime.value = _lifeTime;
+    }
+    Feuerwerk.editRocket = editRocket;
+    /*  function activeRocket2(_entryID: number, _rocketName: string, _color1: string, _color2: string, _shape: string, _amount: string, _lifeTime: string): void {
+         console.log("edit list element");
+ 
+         let formData: FormData = new FormData(document.forms[0]);
+ 
+ 
+         // Get Name
+         let name: string = <string>formData.get("Name");
+         name = _rocketName;
+ 
+         // Get Color
+         let colorPicker1: string = <string>formData.get("Color1");
+         colorPicker1 = _color1;
+ 
+         let colorPicker2: string = <string>formData.get("Color2");
+         colorPicker2 = _color2;
+ 
+         // alphaTime/Lifetime
+         let lifetimeString: string = <string>formData.get("Lifetime");
+         lifetimeString = _lifeTime;
+ 
+         // Amount
+         let amountString: string = <string>formData.get("Amount");
+         amountString = _amount;
+ 
+ 
+         // Gett String from formdata
+         let targetShape: string = <string>formData.get("Shape");
+ 
+         let activeShape: string = _shape;
+ 
+         switch (activeShape) {
+             case "circle":
+                 targetShape = "circle";
+                 break;
+             case "drop":
+                 targetShape = "drop";
+                 break;
+             case "star":
+                 targetShape = "star";
+                 break;
+             default:
+         }
+ 
+         removeFromDatalist(_entryID);
+ 
+         console.log("aktivFUnktion AN");
+ 
+     }
+  */
 })(Feuerwerk || (Feuerwerk = {}));
 //# sourceMappingURL=Data.js.map
