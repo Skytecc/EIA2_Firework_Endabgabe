@@ -11,7 +11,7 @@ namespace Feuerwerk {
     }
 
     //Funktion um die Datenbankliste anzeigen zu lassen
-    export async function showSavedRockets(_data: DataEntries): Promise <void> {    
+    export async function showSavedRockets(_data: DataEntries): Promise<void> {
         console.log(_data);
 
         // Neue Liste wird kreiert um die entries ID in einer seperaten Liste zu bekommen (Kannst du mit console.log(entries[x]) probieren)
@@ -65,12 +65,19 @@ namespace Feuerwerk {
 
             deleteButton.addEventListener("click", function (): void {
                 removeFromDatalist(entryID);
+
+                window.setInterval(function (): void {
+                    window.localStorage.reload();
+                },                 500);
             });
 
 
             editButton.addEventListener("click", function (): void {
                 editRocket(entry.Name, entry.Color1, entry.Color2, entry.Shape, entry.Amount, entry.Lifetime);
                 removeFromDatalist(entryID);
+                window.setInterval(function (): void {
+                    window.localStorage.reload();
+                },                 500);
             });
 
             console.log(entry.Shape);

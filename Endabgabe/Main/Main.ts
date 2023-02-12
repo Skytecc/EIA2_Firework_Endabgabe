@@ -187,6 +187,10 @@ namespace Feuerwerk {
 
         sendItem();
 
+        window.setInterval(function (): void {
+            window.localStorage.reload();
+        },                 500);
+
     }
 
     export function deleteRocket(_event: MouseEvent): void {

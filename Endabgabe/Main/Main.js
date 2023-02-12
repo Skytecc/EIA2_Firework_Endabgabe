@@ -129,6 +129,9 @@ var Feuerwerk;
         divRocket.addEventListener("click", deleteRocket);
         editButton.addEventListener("click", deleteRocket);
         Feuerwerk.sendItem();
+        window.setInterval(function () {
+            window.localStorage.reload();
+        }, 500);
     }
     function deleteRocket(_event) {
         let target = _event.target;
