@@ -46,6 +46,7 @@ var Feuerwerk;
                 editRocket(entry.Name, entry.Color1, entry.Color2, entry.Shape, entry.Amount, entry.Lifetime);
                 removeFromDatalist(entryID);
             });
+            console.log(entry.Shape);
             /*    console.log("Hier ist entryID");
                console.log(entryID[12]); */
         }
@@ -89,6 +90,7 @@ var Feuerwerk;
     }
     Feuerwerk.removeFromDatalist = removeFromDatalist;
     function editRocket(_rocketName, _color1, _color2, _shape, _amount, _lifeTime) {
+        let formData = new FormData(document.forms[0]);
         console.log("edit list element");
         let name = document.querySelector("#name");
         name.value = _rocketName;
@@ -98,6 +100,31 @@ var Feuerwerk;
         color2.value = _color2;
         /*    let shape: HTMLInputElement = <HTMLInputElement>document.querySelector(".radioShape");
            shape.value = _shape; */
+        // Gett String from formdata
+        let targetShape = formData.get("Shape");
+        let circleRadio = document.getElementById("circleRadio");
+        let dropRadio = document.getElementById("dropRadio");
+        let starRadio = document.getElementById("starRadio");
+        console.log("hier ist edit Shape Aussage");
+        console.log(_shape);
+        switch (_shape) {
+            case "circle":
+                circleRadio.checked = true;
+                dropRadio.checked = false;
+                starRadio.checked = false;
+                break;
+            case "drop":
+                dropRadio.checked = true;
+                circleRadio.checked = false;
+                starRadio.checked = false;
+                break;
+            case "star":
+                starRadio.checked = true;
+                circleRadio.checked = false;
+                dropRadio.checked = false;
+                break;
+            default:
+        }
         let amount = document.querySelector("#amount");
         amount.value = _amount;
         let lifetime = document.querySelector("#lifetime");

@@ -76,6 +76,8 @@ namespace Feuerwerk {
                 removeFromDatalist(entryID);
             });
 
+            console.log(entry.Shape);
+
             /*    console.log("Hier ist entryID");
                console.log(entryID[12]); */
         }
@@ -123,6 +125,9 @@ namespace Feuerwerk {
     }
 
     export function editRocket(_rocketName: string, _color1: string, _color2: string, _shape: string, _amount: string, _lifeTime: string): void {
+
+        let formData: FormData = new FormData(document.forms[0]);
+
         console.log("edit list element");
         let name: HTMLInputElement = <HTMLInputElement>document.querySelector("#name");
         name.value = _rocketName;
@@ -130,8 +135,37 @@ namespace Feuerwerk {
         color1.value = _color1;
         let color2: HTMLInputElement = <HTMLInputElement>document.querySelector("#color2");
         color2.value = _color2;
-     /*    let shape: HTMLInputElement = <HTMLInputElement>document.querySelector(".radioShape");
-        shape.value = _shape; */
+        /*    let shape: HTMLInputElement = <HTMLInputElement>document.querySelector(".radioShape");
+           shape.value = _shape; */
+
+        // Gett String from formdata
+        let targetShape: string = <string>formData.get("Shape");
+        let circleRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("circleRadio");
+        let dropRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("dropRadio");
+        let starRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("starRadio");
+
+        console.log("hier ist edit Shape Aussage")
+        console.log(_shape);
+
+        switch (_shape) {
+            case "circle":
+                circleRadio.checked = true;
+                dropRadio.checked = false;
+                starRadio.checked = false;
+                break;
+            case "drop":
+                dropRadio.checked = true;
+                circleRadio.checked = false;
+                starRadio.checked = false;
+                break;
+            case "star":
+                starRadio.checked = true;
+                circleRadio.checked = false;
+                dropRadio.checked = false;
+                break;
+            default:
+        }
+        
         let amount: HTMLInputElement = <HTMLInputElement>document.querySelector("#amount");
         amount.value = _amount;
         let lifetime: HTMLInputElement = <HTMLInputElement>document.querySelector("#lifetime");

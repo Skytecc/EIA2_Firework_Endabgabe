@@ -131,7 +131,7 @@ var Feuerwerk;
         Feuerwerk.sendItem();
         window.setInterval(function () {
             window.location.reload();
-        }, 100);
+        }, 500);
     }
     function deleteRocket(_event) {
         let target = _event.target;
