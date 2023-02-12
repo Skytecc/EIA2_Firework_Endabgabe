@@ -52,46 +52,30 @@ namespace Feuerwerk {
 
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
 
-        // DomRect = getBoundingClientrect gibt wieder an wlecher Position das Objekt auf dem HTML ist.
-        // Bzw, um genauer zu sein wo das Canvas ist. Es positioniert dieses und somit kann man die x und y Werte vom Canvas lesen
         let rect: DOMRect = canvas.getBoundingClientRect();
 
         let positionX: number = _event.clientX - rect.left;
         let positionY: number = _event.clientY - rect.top;
         console.log(positionX, positionY);
 
-        // Get Formlements
         let formData: FormData = new FormData(document.forms[0]);
 
-        // Get Name
         let name: string = <string>formData.get("Name")
 
-        // Get Color
         let colorPicker1: string = <string>formData.get("Color1");
         let colorPicker2: string = <string>formData.get("Color2");
 
-        // alphaTime/Lifetime
         let lifetimeString: string = <string>formData.get("Lifetime");
         let lifetime: number = parseInt(lifetimeString);
 
-        // Amount
         let amountString: string = <string>formData.get("Amount");
         let amount: number = parseInt(amountString);
 
-        console.log(amount + " hier ist Amount");
-
-        // Gett String from formdata
-
         let targetShape: string = <string>formData.get("Shape");
-        console.log(targetShape);
 
         let currentShape: string = <string>targetShape;
 
         let currentParticle: Rocket;
-
-        //console.log(colorPicker1);
-
-        // First color Particles
 
         for (let i: number = 0; i <= amount; i++) {
 
@@ -128,8 +112,6 @@ namespace Feuerwerk {
 
     function animateExplosion(): void {
 
-        // making particle Animation that it fades and splices from Array
-
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.querySelector("#canvas");
 
         crc2.clearRect(0, 0, canvas.width, canvas.height);
@@ -144,7 +126,6 @@ namespace Feuerwerk {
             }
         }
 
-        //console.log(particles);
     }
 
     function addRocket(_event: MouseEvent): void {

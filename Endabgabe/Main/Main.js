@@ -31,33 +31,21 @@ var Feuerwerk;
     Feuerwerk.update = update;
     function createRocket(_event) {
         let canvas = document.querySelector("#canvas");
-        // DomRect = getBoundingClientrect gibt wieder an wlecher Position das Objekt auf dem HTML ist.
-        // Bzw, um genauer zu sein wo das Canvas ist. Es positioniert dieses und somit kann man die x und y Werte vom Canvas lesen
         let rect = canvas.getBoundingClientRect();
         let positionX = _event.clientX - rect.left;
         let positionY = _event.clientY - rect.top;
         console.log(positionX, positionY);
-        // Get Formlements
         let formData = new FormData(document.forms[0]);
-        // Get Name
         let name = formData.get("Name");
-        // Get Color
         let colorPicker1 = formData.get("Color1");
         let colorPicker2 = formData.get("Color2");
-        // alphaTime/Lifetime
         let lifetimeString = formData.get("Lifetime");
         let lifetime = parseInt(lifetimeString);
-        // Amount
         let amountString = formData.get("Amount");
         let amount = parseInt(amountString);
-        console.log(amount + " hier ist Amount");
-        // Gett String from formdata
         let targetShape = formData.get("Shape");
-        console.log(targetShape);
         let currentShape = targetShape;
         let currentParticle;
-        //console.log(colorPicker1);
-        // First color Particles
         for (let i = 0; i <= amount; i++) {
             let color;
             if (i < amount / 2) {
@@ -86,7 +74,6 @@ var Feuerwerk;
         }
     }
     function animateExplosion() {
-        // making particle Animation that it fades and splices from Array
         let canvas = document.querySelector("#canvas");
         Feuerwerk.crc2.clearRect(0, 0, canvas.width, canvas.height);
         for (let particle of particles) {
@@ -98,7 +85,6 @@ var Feuerwerk;
                 particle.explode();
             }
         }
-        //console.log(particles);
     }
     function addRocket(_event) {
         let rocketList = document.getElementById("list");
