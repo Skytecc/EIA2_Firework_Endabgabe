@@ -2,7 +2,7 @@
 var Feuerwerk;
 (function (Feuerwerk) {
     //Funktion um die Datenbankliste anzeigen zu lassen
-    function showSavedRockets(_data) {
+    async function showSavedRockets(_data) {
         let formData = new FormData(document.forms[0]);
         console.log(_data);
         // Neue Liste wird kreiert um die entries ID in einer seperaten Liste zu bekommen (Kannst du mit console.log(entries[x]) probieren)

@@ -11,7 +11,7 @@ namespace Feuerwerk {
     }
 
     //Funktion um die Datenbankliste anzeigen zu lassen
-    export function showSavedRockets(_data: DataEntries): void {
+    export async function showSavedRockets(_data: DataEntries): Promise <void> {
 
         let formData: FormData = new FormData(document.forms[0]);
 
