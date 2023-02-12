@@ -188,7 +188,7 @@ namespace Feuerwerk {
         sendItem();
 
         window.setInterval(function (): void {
-            window.localStorage.reload();
+            window.location.reload();
         },                 500);
 
     }

@@ -130,7 +130,7 @@ var Feuerwerk;
         editButton.addEventListener("click", deleteRocket);
         Feuerwerk.sendItem();
         window.setInterval(function () {
-            window.localStorage.reload();
+            window.location.reload();
         }, 500);
     }
     function deleteRocket(_event) {
