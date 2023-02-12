@@ -13,8 +13,6 @@ namespace Feuerwerk {
         y: number;
     }
     
-    let canvas: HTMLCanvasElement;
-
     let particles: Rocket[] = [];
 
     window.addEventListener("load", handleload);
@@ -25,22 +23,15 @@ namespace Feuerwerk {
         
         let response: Response = await fetch("https://webuser.hs-furtwangen.de/~nguyenki/Database/?command=find&collection=Rocketlist");
         let offer: string = await response.text();
-        //console.log(offer);
         let dataJson: DataEntries = JSON.parse(offer);
-        console.log("hier startet data.json");
-        console.log(dataJson.data);
-        //console.log("Response", response);
-        //console.log(dataJson);
 
-        canvas = <HTMLCanvasElement>document.querySelector("#canvas");
+        let canvas = <HTMLCanvasElement>document.querySelector("#canvas");
 
-        // Siehe Canvas Lektion
         if (!canvas) {
             return;
         }
 
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-        console.log("Canvas");
 
         canvas.addEventListener("click", createRocket);
 
@@ -54,9 +45,7 @@ namespace Feuerwerk {
     }
 
     export function update(): void {
-        //Update Funktion
         requestAnimationFrame(animateExplosion);
-
     }
 
     function createRocket(_event: MouseEvent): void {
@@ -72,7 +61,6 @@ namespace Feuerwerk {
         console.log(positionX, positionY);
 
         // Get Formlements
-
         let formData: FormData = new FormData(document.forms[0]);
 
         // Get Name

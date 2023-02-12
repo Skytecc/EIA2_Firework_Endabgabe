@@ -8,25 +8,17 @@ Quellen: <Ann-Kathrin Haas>
 */
 var Feuerwerk;
 (function (Feuerwerk) {
-    let canvas;
     let particles = [];
     window.addEventListener("load", handleload);
     async function handleload() {
         let response = await fetch("https://webuser.hs-furtwangen.de/~nguyenki/Database/?command=find&collection=Rocketlist");
         let offer = await response.text();
-        //console.log(offer);
         let dataJson = JSON.parse(offer);
-        console.log("hier startet data.json");
-        console.log(dataJson.data);
-        //console.log("Response", response);
-        //console.log(dataJson);
-        canvas = document.querySelector("#canvas");
-        // Siehe Canvas Lektion
+        let canvas = document.querySelector("#canvas");
         if (!canvas) {
             return;
         }
         Feuerwerk.crc2 = canvas.getContext("2d");
-        console.log("Canvas");
         canvas.addEventListener("click", createRocket);
         let addButton = document.querySelector("#addRocket");
         addButton.addEventListener("click", addRocket);
@@ -34,7 +26,6 @@ var Feuerwerk;
         window.setInterval(update, 20);
     }
     function update() {
-        //Update Funktion
         requestAnimationFrame(animateExplosion);
     }
     Feuerwerk.update = update;
