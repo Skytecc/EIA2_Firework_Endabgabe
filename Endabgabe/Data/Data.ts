@@ -67,7 +67,7 @@ namespace Feuerwerk {
                 removeFromDatalist(entryID);
 
                 window.setInterval(function (): void {
-                    window.localStorage.reload();
+                    window.location.reload();
                 },                 500);
             });
 
@@ -76,7 +76,7 @@ namespace Feuerwerk {
                 editRocket(entry.Name, entry.Color1, entry.Color2, entry.Shape, entry.Amount, entry.Lifetime);
                 removeFromDatalist(entryID);
                 window.setInterval(function (): void {
-                    window.localStorage.reload();
+                    window.location.reload();
                 },                 500);
             });
 

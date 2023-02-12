@@ -41,14 +41,14 @@ var Feuerwerk;
             deleteButton.addEventListener("click", function () {
                 removeFromDatalist(entryID);
                 window.setInterval(function () {
-                    window.localStorage.reload();
+                    window.location.reload();
                 }, 500);
             });
             editButton.addEventListener("click", function () {
                 editRocket(entry.Name, entry.Color1, entry.Color2, entry.Shape, entry.Amount, entry.Lifetime);
                 removeFromDatalist(entryID);
                 window.setInterval(function () {
-                    window.localStorage.reload();
+                    window.location.reload();
                 }, 500);
             });
             console.log(entry.Shape);
