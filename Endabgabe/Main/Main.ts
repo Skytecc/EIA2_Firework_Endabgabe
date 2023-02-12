@@ -2,7 +2,7 @@
 Aufgabe: <Endaufgabe Feuerwerk>
 Name: <Cindy Nguyen>
 Matrikel: <271131>
-Datum: <>
+Datum: <12.02.2023>
 Quellen: <Ann-Kathrin Haas>
 */
 
