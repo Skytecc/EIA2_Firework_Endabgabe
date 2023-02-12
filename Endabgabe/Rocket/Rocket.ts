@@ -2,7 +2,6 @@ namespace Feuerwerk {
     export abstract class Rocket {
 
         public position: Vector;
-        // dx, dy are the destination x and y position 
         public dx: number; 
         public dy: number;
         public alphaTime: number;

@@ -3,7 +3,6 @@ var Feuerwerk;
 (function (Feuerwerk) {
     class Rocket {
         position;
-        // dx, dy are the destination x and y position 
         dx;
         dy;
         alphaTime;
