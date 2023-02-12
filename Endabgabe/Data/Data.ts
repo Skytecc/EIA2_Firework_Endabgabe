@@ -139,10 +139,9 @@ namespace Feuerwerk {
            shape.value = _shape; */
 
         // Gett String from formdata
-        let targetShape: string = <string>formData.get("Shape");
-        let circleRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("circleRadio");
-        let dropRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("dropRadio");
-        let starRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("starRadio");
+        let circleRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("circle");
+        let dropRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("drop");
+        let starRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("star");
 
         console.log("hier ist edit Shape Aussage")
         console.log(_shape);
@@ -150,79 +149,20 @@ namespace Feuerwerk {
         switch (_shape) {
             case "circle":
                 circleRadio.checked = true;
-                dropRadio.checked = false;
-                starRadio.checked = false;
                 break;
             case "drop":
                 dropRadio.checked = true;
-                circleRadio.checked = false;
-                starRadio.checked = false;
                 break;
             case "star":
                 starRadio.checked = true;
-                circleRadio.checked = false;
-                dropRadio.checked = false;
                 break;
             default:
         }
-        
+
         let amount: HTMLInputElement = <HTMLInputElement>document.querySelector("#amount");
         amount.value = _amount;
         let lifetime: HTMLInputElement = <HTMLInputElement>document.querySelector("#lifetime");
         lifetime.value = _lifeTime;
 
     }
-
-
-
-    /*  function activeRocket2(_entryID: number, _rocketName: string, _color1: string, _color2: string, _shape: string, _amount: string, _lifeTime: string): void {
-         console.log("edit list element");
- 
-         let formData: FormData = new FormData(document.forms[0]);
- 
- 
-         // Get Name
-         let name: string = <string>formData.get("Name");
-         name = _rocketName;
- 
-         // Get Color
-         let colorPicker1: string = <string>formData.get("Color1");
-         colorPicker1 = _color1;
- 
-         let colorPicker2: string = <string>formData.get("Color2");
-         colorPicker2 = _color2;
- 
-         // alphaTime/Lifetime
-         let lifetimeString: string = <string>formData.get("Lifetime");
-         lifetimeString = _lifeTime;
- 
-         // Amount
-         let amountString: string = <string>formData.get("Amount");
-         amountString = _amount;
- 
- 
-         // Gett String from formdata
-         let targetShape: string = <string>formData.get("Shape");
- 
-         let activeShape: string = _shape;
- 
-         switch (activeShape) {
-             case "circle":
-                 targetShape = "circle";
-                 break;
-             case "drop":
-                 targetShape = "drop";
-                 break;
-             case "star":
-                 targetShape = "star";
-                 break;
-             default:
-         }
- 
-         removeFromDatalist(_entryID);
- 
-         console.log("aktivFUnktion AN");
- 
-     }
-  */
 }
