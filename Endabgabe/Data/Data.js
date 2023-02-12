@@ -3,7 +3,6 @@ var Feuerwerk;
 (function (Feuerwerk) {
     //Funktion um die Datenbankliste anzeigen zu lassen
     async function showSavedRockets(_data) {
-        let formData = new FormData(document.forms[0]);
         console.log(_data);
         // Neue Liste wird kreiert um die entries ID in einer seperaten Liste zu bekommen (Kannst du mit console.log(entries[x]) probieren)
         // x ist die Array stelle, falls man es überprüfen will
@@ -90,7 +89,6 @@ var Feuerwerk;
     }
     Feuerwerk.removeFromDatalist = removeFromDatalist;
     function editRocket(_rocketName, _color1, _color2, _shape, _amount, _lifeTime) {
-        let formData = new FormData(document.forms[0]);
         console.log("edit list element");
         let name = document.querySelector("#name");
         name.value = _rocketName;
@@ -98,8 +96,6 @@ var Feuerwerk;
         color1.value = _color1;
         let color2 = document.querySelector("#color2");
         color2.value = _color2;
-        /*    let shape: HTMLInputElement = <HTMLInputElement>document.querySelector(".radioShape");
-           shape.value = _shape; */
         // Gett String from formdata
         let circleRadio = document.getElementById("circle");
         let dropRadio = document.getElementById("drop");

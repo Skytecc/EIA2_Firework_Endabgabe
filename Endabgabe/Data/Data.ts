@@ -11,10 +11,7 @@ namespace Feuerwerk {
     }
 
     //Funktion um die Datenbankliste anzeigen zu lassen
-    export async function showSavedRockets(_data: DataEntries): Promise <void> {
-
-        let formData: FormData = new FormData(document.forms[0]);
-
+    export async function showSavedRockets(_data: DataEntries): Promise <void> {    
         console.log(_data);
 
         // Neue Liste wird kreiert um die entries ID in einer seperaten Liste zu bekommen (Kannst du mit console.log(entries[x]) probieren)
@@ -126,8 +123,6 @@ namespace Feuerwerk {
 
     export function editRocket(_rocketName: string, _color1: string, _color2: string, _shape: string, _amount: string, _lifeTime: string): void {
 
-        let formData: FormData = new FormData(document.forms[0]);
-
         console.log("edit list element");
         let name: HTMLInputElement = <HTMLInputElement>document.querySelector("#name");
         name.value = _rocketName;
@@ -135,15 +130,13 @@ namespace Feuerwerk {
         color1.value = _color1;
         let color2: HTMLInputElement = <HTMLInputElement>document.querySelector("#color2");
         color2.value = _color2;
-        /*    let shape: HTMLInputElement = <HTMLInputElement>document.querySelector(".radioShape");
-           shape.value = _shape; */
 
         // Gett String from formdata
         let circleRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("circle");
         let dropRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("drop");
         let starRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("star");
 
-        console.log("hier ist edit Shape Aussage")
+        console.log("hier ist edit Shape Aussage");
         console.log(_shape);
 
         switch (_shape) {

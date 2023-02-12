@@ -169,7 +169,7 @@ namespace Feuerwerk {
         rocketList.appendChild(divRocket);
 
         let editButton: HTMLDivElement = <HTMLDivElement>document.createElement("div");
-        editButton.classList.add("fa-solid", "fa-pen-to-square","editbutton");
+        editButton.classList.add("fa-solid", "fa-pen-to-square", "editbutton");
         divRocket.appendChild(editButton);
 
         let newRocket: HTMLParagraphElement = document.createElement("p");
