@@ -186,10 +186,10 @@ namespace Feuerwerk {
         editButton.addEventListener("click",deleteRocket);
 
         sendItem();
-
+/* 
         window.setInterval(function(): void {
             window.location.reload();
-        }, 500);
+        }, 500); */
 
     }
 
