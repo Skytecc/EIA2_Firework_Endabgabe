@@ -10,6 +10,8 @@ var Feuerwerk;
         }
         for (let entryID of entries) {
             let entry = _data.data[entryID];
+            console.log("hier!");
+            console.log(entry);
             let rocketList = document.getElementById("list");
             let divRocket = document.createElement("div");
             divRocket.classList.add("divNewRocket");
@@ -86,8 +88,6 @@ var Feuerwerk;
         let circleRadio = document.getElementById("circle");
         let dropRadio = document.getElementById("drop");
         let starRadio = document.getElementById("star");
-        console.log("hier ist edit Shape Aussage");
-        console.log(_shape);
         switch (_shape) {
             case "circle":
                 circleRadio.checked = true;

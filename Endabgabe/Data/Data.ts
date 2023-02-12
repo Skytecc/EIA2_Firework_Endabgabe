@@ -23,6 +23,9 @@ namespace Feuerwerk {
 
             let entry: any = _data.data[entryID];
 
+            console.log("hier!");
+            console.log(entry);
+
             let rocketList: HTMLUListElement = <HTMLUListElement>document.getElementById("list");
 
             let divRocket: HTMLDivElement = <HTMLDivElement>document.createElement("div");
@@ -114,9 +117,6 @@ namespace Feuerwerk {
         let circleRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("circle");
         let dropRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("drop");
         let starRadio: HTMLInputElement = <HTMLInputElement>document.getElementById("star");
-
-        console.log("hier ist edit Shape Aussage");
-        console.log(_shape);
 
         switch (_shape) {
             case "circle":
